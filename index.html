@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Nuestro Amor</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #2b0033, #0b0014);
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+}
+
+/* TEXTO */
+#message {
+    position: absolute;
+    left: 40px;
+    top: 18%;
+    width: 340px;
+    font-size: 16px;
+    line-height: 1.6;
+    animation: fadeIn 3s ease forwards;
+}
+
+#message strong {
+    color: #ff9ad5;
+    font-size: 18px;
+}
+
+/* CORAZÓN INICIAL */
+#small-heart {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 34px;
+    animation: fall 4s ease forwards;
+}
+
+/* ÁRBOL MÁGICO */
+#tree {
+    position: absolute;
+    bottom: -400px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 260px;
+    opacity: 0;
+    animation: grow 4s ease forwards;
+    animation-delay: 4s;
+    filter: drop-shadow(0 0 30px #ff6ec7);
+}
+
+/* CONTADOR */
+#counter {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #ffd6f2;
+    text-shadow: 0 0 15px #ff6ec7;
+}
+
+/* PÉTALOS */
+.petal {
+    position: absolute;
+    font-size: 18px;
+    animation: petalFall linear infinite;
+}
+
+/* ANIMACIONES */
+@keyframes fall {
+    to { top: 45%; }
+}
+
+@keyframes grow {
+    to {
+        bottom: 120px;
+        opacity: 1;
+    }
+}
+
+@keyframes petalFall {
+    from { transform: translateY(0) rotate(0deg); opacity: 1; }
+    to { transform: translateY(650px) rotate(360deg); opacity: 0; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- TEXTO -->
+<div id="message">
+    <strong>Para el amor de mi vida:</strong><br><br>
+
+    Si pudiera elegir un lugar seguro,<br>
+    sería a tu lado.<br><br>
+
+    Cuanto más tiempo paso contigo,<br>
+    más te amo.<br><br>
+
+    <strong>— ¡Te amo! ❤️</strong>
+</div>
+
+<!-- CORAZÓN -->
+<div id="small-heart">❤️</div>
+
+<!-- ÁRBOL -->
+<div id="tree">🌳</div>
+
+<!-- CONTADOR -->
+<div id="counter"></div>
+
+<script>
+/* FECHA DE INICIO (30 de enero de 2026) */
+const startDate = new Date("2026-01-30T00:00:00");
+
+/* CONTADOR DE TIEMPO */
+function updateCounter() {
+    const now = new Date();
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("counter").innerHTML = `
+        <div style="font-size:46px;">❤️ ${days} días ❤️</div>
+        <div style="font-size:20px;">
+            ${hours}h ${minutes}m ${seconds}s
+        </div>
+        <div style="margin-top:10px;font-size:16px;color:#ffb6e6;">
+            Juntos desde el 30 de enero de 2026
+        </div>
+    `;
+}
+
+setInterval(updateCounter, 1000);
+updateCounter();
+
+/* PÉTALOS DE CORAZÓN */
+function createPetal() {
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
+    petal.innerText = "💗";
+
+    petal.style.left =
+        (window.innerWidth / 2 - 140 + Math.random() * 280) + "px";
+    petal.style.top = "180px";
+    petal.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+    document.body.appendChild(petal);
+    setTimeout(() => petal.remove(), 6000);
+}
+
+setInterval(createPetal, 350);
+</script>
+
+</body>
+</html>
